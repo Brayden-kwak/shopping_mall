@@ -1,0 +1,32 @@
+.list_sub_container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 1px 3px 4px hsl(0deg 0% 0% / 0.28);
+}
+
+.result_count {
+    padding: 25px 0;
+    font-size: 12px;
+}
+
+.list_sub_container > table {
+    border-collapse: collapse;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.category {
+    border-bottom: 1.5px solid lightgray;
+}
+
+.category > td {
+    padding: 20px 15px;
+    font-size: 16px;
+    font-weight: bold;
+}

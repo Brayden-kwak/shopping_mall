@@ -1,0 +1,8 @@
+.items{
+    border-bottom: 1px solid lightgray;
+}
+
+.items > td{
+    padding: 15px;    
+    font-size: 13px;
+}
