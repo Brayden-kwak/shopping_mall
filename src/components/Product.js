@@ -2,7 +2,6 @@ import React from 'react'
 import "../style/Product.css"
 
 const Product = (props) => {
-console.log(props)
   return (
     <tr className="items">
         <td>{props.index + 1}</td>

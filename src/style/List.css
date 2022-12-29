@@ -30,3 +30,32 @@
     font-size: 16px;
     font-weight: bold;
 }
+
+.pagination-list-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.page-filter-list-box-container {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.page-list-filter-box {
+   width: 50px;
+   height: 35px;
+   border: none;
+   padding: 5px;
+   border-radius: 5px;
+   font-size: 14px;
+}
+
+.result {
+    text-align: center;
+    width: 100%;
+    padding: 50px;
+}

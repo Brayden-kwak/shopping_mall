@@ -1,28 +1,50 @@
 import React from 'react'
 import '../style/Search.css'
+import { useAppDispatch } from "../reducers/store"
+import searchFilterReducer from '../reducers/searchFilterReducer'
+import paginationReducer from '../reducers/paginationReducer'
 import Divider from './Divider'
 
 const Search = () => {
 
-    const [filter, setFilter] = React.useState(["전체"])
     const [inputMessage, setInputMessage] = React.useState("")
+    const [inputCategory, setInputCategory] = React.useState("")
 
-    const selectForm = (e) => {
-        setFilter(e.target.value)
-    }
+    const dispatch = useAppDispatch();
+
+    const selectedRef = React.useRef("");
+    const inputMessageRef = React.useRef("");
 
     const onChange = (e) => {
         setInputMessage(e.target.value)
-        console.log(e.target.value)
     }
 
-    const onClick = () => {
-        console.log("button clicked -> ", inputMessage)
+    const onSubmit = (e) => {
+        e.preventDefault()
+
+        const category = selectedRef.current?.value;
+        const inputText = inputMessageRef.current?.value;
+
+        if ((category !== null || category !== undefined) && (inputText !== null || inputText !== undefined)) {
+            sessionStorage.setItem("category", category)
+            sessionStorage.setItem("inputText", inputText)
+        }
+
+        dispatch(searchFilterReducer.actions.searchFilter({category, inputText}))
     }
 
-    // 리덕스로 상태 공유
-    console.log("filter -> ",filter)
+    const sessionCategory = sessionStorage.getItem("category")
+    const sessionInputText = sessionStorage.getItem("inputText")
 
+    React.useEffect(() => {
+        if ((sessionCategory !== null || sessionCategory !== undefined) && (sessionInputText !== null || sessionInputText !== undefined)) {
+            const storeValues = {category: sessionCategory, inputText: sessionInputText}
+            dispatch(searchFilterReducer.actions.searchFilter(storeValues))
+            setInputMessage(sessionInputText)
+            setInputCategory(sessionCategory)
+        }
+    }, [dispatch, sessionCategory, sessionInputText])
+    
   return (
     <div className="container">
         <div className="title">상품검색</div>
@@ -30,14 +52,29 @@ const Search = () => {
         <div className="sub-container">
             <div className="sub-container-title">검색</div>
             <div className="search-box-container">
-                <select className="select-box" onChange={selectForm}>
-                    <option value="전체">전체</option>
-                    <option value="상품명">상품명</option>
-                    <option value="브랜드">브랜드</option>
-                    <option value="상품내용">상품내용</option>
-                </select>
-                <input type="text" className="input-box" name="inputMessage" value={inputMessage} placeholder="상품검색" onChange={onChange}/>
-                <button onClick={onClick}>조회</button>
+                <form onSubmit={onSubmit}>
+                    <select 
+                        className="select-box"
+                        ref={selectedRef}
+                        value={inputCategory}
+                        onChange={(e) => setInputCategory(e.target.value)}
+                    >
+                        <option value="전체">전체</option>
+                        <option value="상품명">상품명</option>
+                        <option value="브랜드">브랜드</option>
+                        <option value="상품내용">상품내용</option>
+                    </select>
+                    <input 
+                        type="text" 
+                        className="input-box" 
+                        name="inputMessage" 
+                        value={inputMessage} 
+                        ref={inputMessageRef}
+                        placeholder="상품검색" 
+                        onChange={onChange}
+                    />
+                    <button className="search-button">조회</button>
+                </form>
             </div>
         </div>
     </div>

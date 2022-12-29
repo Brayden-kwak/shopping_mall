@@ -1,12 +1,10 @@
 import './App.css';
-import List from './components/List';
-import Search from './components/Search';
+import DashboardPage from './pages/DashboardPage';
 
 function App() {
   return (
     <div className="App">
-      <Search/>
-      <List/>
+      <DashboardPage/>
     </div>
   );
 }
