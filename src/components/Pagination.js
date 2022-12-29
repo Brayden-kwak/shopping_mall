@@ -1,14 +1,15 @@
 import React from 'react'
-import { usePagination, DOTS } from "../Hooks/usePagination"
 import "../style/Pagination.css"
+import { usePagination, DOTS } from "../Hooks/usePagination"
 
 const Pagination = (props) => {
 
     const { onPageChange, totalCount, siblingCount = 1, currentPage, pageSize } = props
 
     const paginationRange = usePagination({ currentPage, totalCount, siblingCount, pageSize })
+    const lastPage = paginationRange && paginationRange[paginationRange?.length - 1]
 
-    if (currentPage === 0 || paginationRange?.length < 2) {
+    if (currentPage === 0 || paginationRange?.length < 1) {
         return null
     }
 
@@ -19,8 +20,6 @@ const Pagination = (props) => {
     const onPrevious = () => {
         onPageChange(currentPage - 1)
     }
-
-    const lastPage = paginationRange && paginationRange[paginationRange?.length - 1]
 
   return (
     <ul className="pagination-container">

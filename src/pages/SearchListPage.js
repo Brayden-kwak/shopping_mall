@@ -2,7 +2,7 @@ import React from 'react'
 import Search from '../components/Search';
 import List from '../components/List';
 
-const DashboardPage = () => {
+const SearchListPage = () => {
   return (
     <>
         <Search/>
@@ -11,4 +11,4 @@ const DashboardPage = () => {
   )
 }
 
-export default DashboardPage
+export default SearchListPage

@@ -22,10 +22,6 @@ const paginationRange = React.useMemo(() => {
         const totalPageCount = Math.ceil(totalCount / pageData.divide)
         const totalPageNumbers = siblingCount + 5
 
-        if (pageData.totalProducts < 10) {
-            return range(1, 1)
-        }
-
         if (totalPageNumbers >= totalPageCount) {
             return range(1, totalPageCount)
         }
@@ -58,7 +54,7 @@ const paginationRange = React.useMemo(() => {
 
             return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex]
         }
-    }, [currentPage, pageData.divide, pageData.totalProducts, siblingCount, totalCount])
+    }, [currentPage, pageData.divide, siblingCount, totalCount])
 
     return paginationRange
 }

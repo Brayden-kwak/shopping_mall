@@ -1,6 +1,6 @@
 import React from 'react'
-import useFetchApi from '../Hooks/useFetchApi'
 import "../style/List.css"
+import useFetchApi from '../Hooks/useFetchApi'
 import Pagination from './Pagination'
 import Product from './Product'
 import { useAppDispatch } from "../reducers/store";
@@ -26,31 +26,27 @@ const List = () => {
     }, [currentPage, data.products, limitData])
 
     const filteredData = currentData?.filter(item => {
-        if (searchInput.inputText === undefined || searchInput.inputText === "") {
+        if (searchInput?.inputText === undefined || searchInput?.inputText === "" || searchInput?.inputText === null) {
             return true
         } 
 
         let output = false
 
-        const searchText = searchInput.inputText.toLowerCase()
-        const title = item.title.toLowerCase()
-        const brand = item.brand.toLowerCase()
-        const description = item.description.toLowerCase()
+        const searchText = searchInput.inputText?.toLowerCase()
 
         if (searchInput.category === "전체") {
             output = 
-                title.includes(searchText) ||
-                brand.includes(searchText) ||
-                description.includes(searchText) 
+                item.title.toLowerCase().includes(searchText) ||
+                item.brand.toLowerCase().includes(searchText) ||
+                item.description.toLowerCase().includes(searchText) 
         } else if (searchInput.category === "상품명") {
-            output = title.includes(searchText)
+            output = item.title.toLowerCase().includes(searchText)
         } else if (searchInput.category === "브랜드") {
-            output = brand.includes(searchText)
-        } else if (searchInput.category === "상품내용"){
-            output = description.includes(searchText)
+            output = item.brand.toLowerCase().includes(searchText)
         } else {
-            console.log("결과가 없습니다")
-        }
+            output = item.description.toLowerCase().includes(searchText)
+        } 
+        
         return output
     })
 
@@ -104,7 +100,7 @@ const List = () => {
                             <option value="50">50</option>
                         </select>
                     </div>
-
+                    
                     <Pagination 
                         currentPage={currentPage}
                         totalCount={totalCount}

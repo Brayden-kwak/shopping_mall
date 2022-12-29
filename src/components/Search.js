@@ -3,20 +3,34 @@ import '../style/Search.css'
 import { useAppDispatch } from "../reducers/store"
 import searchFilterReducer from '../reducers/searchFilterReducer'
 import Divider from './Divider'
+import CustomSelect from './CustomSelect';
+
+// select box 커스텀 스타일 시도
+// const optionList = [
+//     {value: "전체", key: 0},
+//     {value: "상품명", key: 1},
+//     {value: "브랜드", key: 2},
+//     {value: "상품내용", key: 3},
+// ]
 
 const Search = () => {
 
     const [inputMessage, setInputMessage] = React.useState("")
-    const [inputCategory, setInputCategory] = React.useState("")
+    const [inputCategory, setInputCategory] = React.useState("전체")
 
     const dispatch = useAppDispatch();
 
-    const selectedRef = React.useRef("");
-    const inputMessageRef = React.useRef("");
+    const selectedRef = React.useRef(null);
+    const inputMessageRef = React.useRef(null);
 
     const onChange = (e) => {
         setInputMessage(e.target.value)
     }
+
+    // select box 커스텀 스타일 시도
+    // const getData = (data) => {
+    //     setInputCategory(data);
+    // };
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -55,7 +69,7 @@ const Search = () => {
                     <select 
                         className="select-box"
                         ref={selectedRef}
-                        value={inputCategory}
+                        value={inputCategory || ''}
                         onChange={(e) => setInputCategory(e.target.value)}
                     >
                         <option value="전체">전체</option>
@@ -63,11 +77,18 @@ const Search = () => {
                         <option value="브랜드">브랜드</option>
                         <option value="상품내용">상품내용</option>
                     </select>
+
+                    {/* select box 커스텀 스타일 시도 */}
+                    {/* <CustomSelect
+                        optionList={optionList}
+                        getData={getData}
+                    /> */}
+
                     <input 
                         type="text" 
                         className="input-box" 
                         name="inputMessage" 
-                        value={inputMessage} 
+                        value={inputMessage || ''} 
                         ref={inputMessageRef}
                         placeholder="상품검색" 
                         onChange={onChange}
