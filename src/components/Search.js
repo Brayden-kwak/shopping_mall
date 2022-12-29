@@ -2,7 +2,6 @@ import React from 'react'
 import '../style/Search.css'
 import { useAppDispatch } from "../reducers/store"
 import searchFilterReducer from '../reducers/searchFilterReducer'
-import paginationReducer from '../reducers/paginationReducer'
 import Divider from './Divider'
 
 const Search = () => {

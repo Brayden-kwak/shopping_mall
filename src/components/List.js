@@ -1,7 +1,6 @@
 import React from 'react'
 import useFetchApi from '../Hooks/useFetchApi'
 import "../style/List.css"
-import { connect } from 'react-redux';
 import Pagination from './Pagination'
 import Product from './Product'
 import { useAppDispatch } from "../reducers/store";
